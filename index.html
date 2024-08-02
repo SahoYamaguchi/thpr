@@ -8,7 +8,7 @@
     <h3>リハタイマー</h3>
     <hr />
     <form name="songs">
-      <input type="text" name="title" size="50" style="font-size: 80px" />
+      <input type="text" name="title" size="80" style="font-size: 80px" />
     </form>
     <form name="ktimer" onSubmit="return false;">
       <input type="text" name="counter" size="20" style="font-size: 350px" />
@@ -16,29 +16,38 @@
         type="button"
         name="b_start"
         size="20"
-        value="もどる"
+        value="←もどる"
         onClick="back()"
+        style="width: 10em; height: 5em; background-color: #99ffff"
       />
       <input
         type="button"
         name="b_stop"
         size="20"
-        value="一時停止"
+        value="||一時停止"
         onClick="stop();"
+        style="width: 10em; height: 5em; background-color: #ccff99"
       />
       <input
         type="button"
         name="b_reset"
         size="20"
-        value="再開"
+        value="▶︎再開"
         onClick="restart();"
+        style="width: 10em; height: 5em; background-color: #ffff33"
       />
       <input
         type="button"
         name="b_reset"
         size="20"
-        value="つぎへ"
+        value="つぎへ→"
         onClick="start()"
+        style="
+          width: 10em;
+          height: 5em;
+          margin-right: 2em;
+          background-color: #ffccff;
+        "
       />
       <input
         type="button"
@@ -46,6 +55,7 @@
         size="30"
         value="+1min"
         onClick="plus()"
+        style="width: 10em; height: 5em; color: #990033"
       />
       <input
         type="button"
@@ -53,6 +63,7 @@
         size="30"
         value="-1min"
         onClick="minus()"
+        style="width: 10em; height: 5em; color: #0000cc"
       />
 
       <br />
