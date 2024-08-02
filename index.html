@@ -2,41 +2,55 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>リハタイマー2023</title>
+    <title>リハタイマー2024</title>
   </head>
   <body>
     <h3>リハタイマー</h3>
     <hr />
     <form name="songs">
-      <input type="text" name="title" size="40" style="font-size: 80px" />
+      <input type="text" name="title" size="20" style="font-size: 80px" />
     </form>
     <form name="ktimer" onSubmit="return false;">
       <input type="text" name="counter" size="20" style="font-size: 350px" />
       <input
         type="button"
         name="b_start"
-        size="10"
+        size="20"
         value="もどる"
         onClick="back()"
       />
       <input
         type="button"
+        name="b_stop"
+        size="20"
+        value="一時停止"
+        onClick="stop();"
+      />
+      <input
+        type="button"
         name="b_reset"
-        size="10"
+        size="20"
+        value="再開"
+        onClick="restart();"
+      />
+      <input
+        type="button"
+        name="b_reset"
+        size="20"
         value="つぎへ"
         onClick="start()"
       />
       <input
         type="button"
         name="b_plus"
-        size="10"
+        size="30"
         value="+1min"
         onClick="plus()"
       />
       <input
         type="button"
         name="b_minus"
-        size="10"
+        size="30"
         value="-1min"
         onClick="minus()"
       />
@@ -48,37 +62,34 @@
 
       var i = 0;
       var music = [
-        "アンコール",
-        "ビフォーアフターへの転換",
-        "ちりとてちん",
-        "ビフォーアフター",
+        "「つぎへ」押したら6秒で開始",
+        "セッティング転換練習",
+        "アンコール練",
+        "アンコール→ゲーム",
+        "ゲーム",
         "休憩",
-        "司会+入場",
-        "ビフォーアフター",
-        "ビフォーアフター→獅子神楽",
-        "獅子神楽",
-        "獅子神楽→アマンドショコラ",
-        "アマンドショコラ",
-        "アマンドショコラ→Kyoto",
-        "Kyoto",
-        "2部へ転換",
-        "鳥伽藍",
-        "鳥伽藍→ちりとてちん",
-        "ちりとてちん",
-        "ちりとてちん→ケルベロス",
-        "ケルベロス",
-        "ケルベロス→Firedance",
-        "Firedance",
-        "Firedance→Spain",
-        "Spain",
-        "3部へ転換+入場",
-        "ゲインズボロー",
-        "ゲインズボロー→アンコール",
+        "説明・ステマネ紹介",
+        "ゲーム",
+        "ゲーム→クープラン",
+        "クープラン",
+        "クープラン→トリパー",
+        "トリパー",
+        "トリパー→Catching Shadows",
+        "Catching Shadows",
+        "CS→盛岡の舞台変更・時間調整",
+        "盛岡",
+        "盛岡→CCC",
+        "CCC",
+        "CCC→エオリアン",
+        "エオリアン",
+        "エオリアン→The Heart of the Day",
+        "The Heart of the Day",
+        "HD→アンコール",
         "アンコール",
       ];
       var time = [
-        36, 10, 16, 24, 34, 4, 6, 6, 20, 3, 22, 4, 36, 15, 20, 6, 4, 3, 16, 3,
-        24, 4, 24, 17, 60, 3, 6,
+        0.1, 45, 24, 10, 40, 11, 2, 10, 5, 17, 3, 25, 4, 42, 20, 52, 6, 22, 4,
+        20, 4, 35, 4, 9,
       ];
       timer_reset();
 
@@ -140,17 +151,22 @@
       }
 
       function plus() {
-        //1min追加
-        count += 60;
+        //+1min
+        count = count + 60;
       }
 
       function minus() {
-        //1min減らす
-        if (count > 60) {
-          count -= 60;
-        } else {
-          count = 0;
-        }
+        //-1min
+        count = count - 60;
+      }
+
+      function stop() {
+        clearInterval(timerID);
+      }
+
+      function restart() {
+        clearInterval(timerID);
+        timerID = setInterval("countdown()", 1000);
       }
     </script>
   </body>
