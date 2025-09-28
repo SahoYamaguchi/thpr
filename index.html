@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>リハタイマー2024</title>
+    <title>リハタイマー第7回</title>
   </head>
   <body>
     <h3>リハタイマー</h3>
@@ -69,63 +69,55 @@
       <br />
     </form>
     <script type="text/javascript">
-      //初期設定
+      //GASのAPIのURL
+      const endpoint =
+        "https://script.google.com/macros/s/AKfycbwaZh2S1JuuSX92NTHa3pku-3jHm2b-NJWolnNg4uWFOF7r_jN6VdhIdxQiq1a5bQfoIA/exec";
+
+      //APIを使って非同期データを取得する
+      var object;
+      fetch(endpoint)
+        .then((response) => response.json())
+        /*成功した処理*/
+        .then((data) => {
+          //JSONから配列に変換
+          object = data;
+          //inputタグそれぞれに取得したデータを設定
+          // $('input').each(function (index, element) {
+          //    if (object[0][$(element).attr('name')]) {
+          //        $(element).val([object[0][$(element).attr('name')]]);
+          //    }
+          //});
+          console.log(object);
+          timer_reset();
+        });
 
       var i = 0;
-      var music = [
-        "「つぎへ」押したら6秒で開始",
-        "セッティング転換練習",
-        "アンコール練",
-        "アンコール→ゲーム",
-        "ゲーム",
-        "休憩",
-        "説明・ステマネ紹介",
-        "ゲーム",
-        "ゲーム→クープラン",
-        "クープラン",
-        "クープラン→トリパー",
-        "トリパー",
-        "トリパー→Catching Shadows",
-        "Catching Shadows",
-        "CS→盛岡の舞台変更・時間調整",
-        "盛岡",
-        "盛岡→CCC",
-        "CCC",
-        "CCC→エオリアン",
-        "エオリアン",
-        "エオリアン→The Heart of the Day",
-        "The Heart of the Day",
-        "HD→アンコール",
-        "アンコール",
-      ];
-      var time = [
-        0.1, 45, 24, 10, 40, 11, 2, 10, 5, 17, 3, 25, 4, 42, 20, 52, 6, 22, 4,
-        20, 4, 35, 4, 9,
-      ];
-      timer_reset();
 
       function timer_reset() {
         //タイマーの初期化
         timerID = 0;
-        document.songs.title.value = music[i];
-        document.ktimer.counter.value = time[i];
+        document.songs.title.value = object[i]["title"];
+        document.ktimer.counter.value = object[i]["time"];
         // document.ktimer.b_start.disabled = false;
       }
+
       function start() {
         set_timer(i);
         i = i + 1;
       }
+
       function back() {
         i = i - 1;
         set_timer(i);
       }
+
       function set_timer(i) {
         //規定時間の設定
         if (timerID > 0) {
           count_stop();
         }
-        document.ktimer.counter.value = time[i] * 60;
-        document.songs.title.value = music[i];
+        document.ktimer.counter.value = object[i]["time"] * 60;
+        document.songs.title.value = object[i]["title"];
         count_start();
       }
 
